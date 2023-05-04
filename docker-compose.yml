@@ -3,19 +3,23 @@ version: "3"
 services:
 
   elastic:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.13.1
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.7.0
     restart: always
     ports:
       - "9200:9200"
       - "9300:9300"
     environment:
       discovery.type: 'single-node'
+      xpack.security.enabled: 'false'
+      xpack.security.enabled: 'false'
+      xpack.security.transport.ssl.enabled: 'false'
+      xpack.security.http.ssl.enabled: 'false'
     networks:
       - elasticnet
     volumes:
       - elasticsearch_data:/usr/share/elasticsearch
   kibana:
-    image: docker.elastic.co/kibana/kibana:7.13.1
+    image: docker.elastic.co/kibana/kibana:8.7.0
     restart: always
     ports:
       - "5601:5601"
@@ -27,7 +31,7 @@ services:
       - kibana_data:/usr/share/kibana
 
   logstash:
-    image: docker.elastic.co/logstash/logstash:7.13.1
+    image: docker.elastic.co/logstash/logstash:8.7.0
     restart: always
     ports:
       - "5044:5044"
